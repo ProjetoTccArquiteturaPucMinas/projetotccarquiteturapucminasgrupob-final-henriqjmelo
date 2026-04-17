@@ -1,17 +1,18 @@
 package com.seuprojeto.marketplace.application.usecase;
 
-import com.seuprojeto.marketplace.application.dto.SelecaoCarrinho;
-import com.seuprojeto.marketplace.domain.model.CategoriaProduto;
-import com.seuprojeto.marketplace.domain.model.Produto;
-import com.seuprojeto.marketplace.domain.repository.ProdutoRepositorio;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.seuprojeto.marketplace.application.dto.SelecaoCarrinho;
+import com.seuprojeto.marketplace.domain.model.CategoriaProduto;
+import com.seuprojeto.marketplace.domain.model.Produto;
+import com.seuprojeto.marketplace.domain.repository.ProdutoRepositorio;
 
 class CalcularCarrinhoUseCaseTest {
 
@@ -30,9 +31,9 @@ class CalcularCarrinhoUseCaseTest {
 
         var result = useCase.executar(input);
 
-        assertEquals(0, result.getSubtotal().compareTo(new BigDecimal("50")));
+        assertEquals(0, result.getSubtotal().compareTo(new BigDecimal("49.90")));
         assertEquals(0, result.getDesconto().compareTo(new BigDecimal("1.50")));
-        assertEquals(0, result.getTotal().compareTo(new BigDecimal("48.50")));
+        assertEquals(0, result.getTotal().compareTo(new BigDecimal("48.40")));
     }
 
     @Test
@@ -103,11 +104,11 @@ class CalcularCarrinhoUseCaseTest {
     static class FakeProdutoRepositorio implements ProdutoRepositorio {
 
         private final List<Produto> produtos = List.of(
-                new Produto(1L, "Capinha", CategoriaProduto.CAPINHA, new BigDecimal("50")),
-                new Produto(2L, "Carregador", CategoriaProduto.CARREGADOR, new BigDecimal("100")),
-                new Produto(3L, "Fone", CategoriaProduto.FONE, new BigDecimal("200")),
-                new Produto(4L, "Película", CategoriaProduto.PELICULA, new BigDecimal("30")),
-                new Produto(5L, "Suporte", CategoriaProduto.SUPORTE, new BigDecimal("80"))
+                new Produto(1L, "Capinha", CategoriaProduto.CAPINHA, new BigDecimal("49.90")),
+                new Produto(2L, "Carregador", CategoriaProduto.CARREGADOR, new BigDecimal("119.90")),
+                new Produto(3L, "Fone", CategoriaProduto.FONE, new BigDecimal("199.90")),
+                new Produto(4L, "Película", CategoriaProduto.PELICULA, new BigDecimal("29.90")),
+                new Produto(5L, "Suporte", CategoriaProduto.SUPORTE, new BigDecimal("59.90"))
         );
 
         @Override
